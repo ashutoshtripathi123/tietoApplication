@@ -1,0 +1,10 @@
+﻿  Windows.cpp
+c:\users\212429464\source\repos\tieto1\tieto1\windows.cpp(11): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+c:\users\212429464\source\repos\tieto1\tieto1\windows.cpp(29): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
+  Result.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  tieto1.cpp
+  tieto1.vcxproj -> C:\Users\212429464\source\repos\tieto1\Debug\tieto1.exe
