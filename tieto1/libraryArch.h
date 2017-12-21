@@ -10,6 +10,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <cstddef>
 
 using namespace std;
 class fileSystemParser

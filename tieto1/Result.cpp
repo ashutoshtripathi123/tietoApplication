@@ -52,15 +52,31 @@ void Result:: addToMap(char *filePath, const char *inputString)
 	string fileLocation;
 	ptr = ptr + strlen(inputString) + 1; //it just has the project name and the file name
 	char *slash = strchr(ptr, '\\');
-	fileLocation = slash;
-	project = ptr;
-	size_t i = project.find(fileLocation);
-	if (i != string::npos)
+	if (slash == NULL)
 	{
-		project.erase(i, fileLocation.length());
+		//cout << "File found in project path" << endl;
+		string temp = inputString;
+		size_t found = temp.find_last_of("/\\");
+		project = temp.substr(found + 1);
+
+		temp = filePath;
+		found = temp.find_last_of("\\");
+		fileLocation = temp.substr(found + 1);
+		//cout << "project = " << project <<" fileLocation = "<<fileLocation<< endl;
+	}
+	else
+	{
+		fileLocation = slash;
+		//cout << filePath << " " << ptr << endl;
+		project = ptr;
+		size_t i = project.find(fileLocation);
+		if (i != string::npos)
+		{
+			project.erase(i, fileLocation.length());
+		}
+		fileLocation = slash + 1;
 	}
 
-	fileLocation = slash + 1;
 	ir1 = ds.find(fileLocation);
 	if (ir1 == ds.end())
 	{

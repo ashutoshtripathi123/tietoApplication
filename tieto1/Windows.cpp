@@ -27,7 +27,7 @@ void Windows :: listDir(char * dirn)
 
 		char filePath[1024];
 		sprintf(filePath, "%s%s%s", dirn, "\\", name);
-
+		//cout << "filePath = " << filePath << endl;
 		//if my filePath is having extension of *.c *.h or *.cpp then add it to the map
 		if (strstr(filePath, ".h") ||
 			strstr(filePath, ".c") ||
