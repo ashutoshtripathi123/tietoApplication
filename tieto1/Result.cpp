@@ -7,6 +7,15 @@ called as finalResult, where the key will be the project name, and second elemen
 be the file name*/
 void Result::prepareResult()
 {
+#if SOFTWARE_DEBUG
+	cout << "Printing ds map:" << endl;
+	for (ir1 = ds.begin();ir1 != ds.end(); ir1++)
+	{
+		cout << ir1->first << '\t' << ir1->second << endl;
+	}
+	cout << endl;
+#endif
+
 	for (ir1 = ds.begin();ir1 != ds.end(); ir1++)
 	{
 		if (strstr(ir1->second.c_str(), ","))
@@ -23,6 +32,15 @@ void Result::prepareResult()
 			}
 		}
 	}
+
+#if SOFTWARE_DEBUG
+	cout << "Printing finalResult map:" << endl;
+	for (ir1 = finalResult.begin();ir1 != finalResult.end(); ir1++)
+	{
+		cout << ir1->first << '\t' << ir1->second << endl;
+	}
+	cout << endl<<"===================================================="<<endl;
+#endif
 
 	for (ir2 = finalResult.begin();ir2 != finalResult.end();ir2++)
 	{
@@ -50,19 +68,17 @@ void Result:: addToMap(char *filePath, const char *inputString)
 	char *ptr = filePath;
 	string project;
 	string fileLocation;
+	string temp;
+	size_t found;
 	ptr = ptr + strlen(inputString) + 1; //it just has the project name and the file name
 	char *slash = strchr(ptr, '\\');
+	
 	if (slash == NULL)
 	{
 		//cout << "File found in project path" << endl;
-		string temp = inputString;
-		size_t found = temp.find_last_of("/\\");
+		temp = inputString;
+		found = temp.find_last_of("/\\");
 		project = temp.substr(found + 1);
-
-		temp = filePath;
-		found = temp.find_last_of("\\");
-		fileLocation = temp.substr(found + 1);
-		//cout << "project = " << project <<" fileLocation = "<<fileLocation<< endl;
 	}
 	else
 	{
@@ -74,9 +90,18 @@ void Result:: addToMap(char *filePath, const char *inputString)
 		{
 			project.erase(i, fileLocation.length());
 		}
-		fileLocation = slash + 1;
+		//fileLocation = slash + 1; //Part of approach 1 where files wont be treated as equal, if directory
+		                            //structure doesn't match across all project, uncomment if going by 1
 	}
 
+	//Remove the next 3 lines, if going by approach 1
+	temp = filePath;
+	found = temp.find_last_of("/\\");
+	fileLocation = temp.substr(found + 1);
+
+#if SOFTWARE_DEBUG
+	cout << "project = " << project << " fileLocation = " << fileLocation << endl;
+#endif
 	ir1 = ds.find(fileLocation);
 	if (ir1 == ds.end())
 	{

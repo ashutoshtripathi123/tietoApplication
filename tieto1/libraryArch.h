@@ -12,6 +12,8 @@
 #include <fstream>
 #include <cstddef>
 
+#define SOFTWARE_DEBUG 0
+
 using namespace std;
 class fileSystemParser
 {
