@@ -48,8 +48,8 @@ void Result::prepareResult()
 		string token;
 		while (getline(iss, token, ','))
 		{
-			cout << "/" << token << endl;
-			fileHandler << "/" << token << endl;
+			cout << token << endl;
+			fileHandler << token << endl;
 		}
 
 		istringstream iss1(ir2->second);
@@ -72,32 +72,18 @@ void Result:: addToMap(char *filePath, const char *inputString)
 	size_t found;
 	ptr = ptr + strlen(inputString) + 1; //it just has the project name and the file name
 	char *slash = strchr(ptr, '\\');
-	
-	if (slash == NULL)
-	{
-		//cout << "File found in project path" << endl;
-		temp = inputString;
-		found = temp.find_last_of("/\\");
-		project = temp.substr(found + 1);
-	}
-	else
-	{
-		fileLocation = slash;
-		//cout << filePath << " " << ptr << endl;
-		project = ptr;
-		size_t i = project.find(fileLocation);
-		if (i != string::npos)
-		{
-			project.erase(i, fileLocation.length());
-		}
-		//fileLocation = slash + 1; //Part of approach 1 where files wont be treated as equal, if directory
-		                            //structure doesn't match across all project, uncomment if going by 1
-	}
 
 	//Remove the next 3 lines, if going by approach 1
 	temp = filePath;
 	found = temp.find_last_of("/\\");
 	fileLocation = temp.substr(found + 1);
+	
+	project = filePath;
+	size_t i = project.find(fileLocation);
+	if (i != string::npos)
+	{
+		project.erase(i, fileLocation.length());
+	}
 
 #if SOFTWARE_DEBUG
 	cout << "project = " << project << " fileLocation = " << fileLocation << endl;
